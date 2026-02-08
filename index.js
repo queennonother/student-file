@@ -1,8 +1,12 @@
 // document.createElement(
-const searchBar = document.getElementById('search-Bar');
-const studentTable = document.getElementById('student-Table');
-const classFilter = document.getElementById('class-Filter');
-const searchInput = document.getElementById('searchBar');
+const tableBody = document.getElementById('table-body');
+const searchInput = document.getElementById('search');
+const classFilter = document.getElementById('classFilter');
+const totalEl = document.getElementById('total');
+const avgAttendanceEl = document.getElementById('avgAttendance');
+const topMathsEl = document.getElementById('topMaths');
+const resetBtn = document.getElementById('resetBtn');
+const exportBtn = document.getElementById('exportBtn');
 
 
 //---------csv parser--------
@@ -11,7 +15,7 @@ function parseCSV(text) {
     const headers = lines.shift().split(',').map(h => h.trim());
     return lines.map(line => {
         const cols = line.split(',').map(c => c.trim());
-        const onj = {};
+        const obj = {};
         headers.forEach((h, i) => obj[h] = cols[i] ?? '')
         return obj;
     });
@@ -77,7 +81,7 @@ function renderTable(list) {
 
 //--------- compute stats---------
 function computeStats(list) {
-    TotalEl.textContent = list.length;
+    totalEl.textContent = list.length;
     const avgAtt = list.length ? (list.reduce((a, b) => + (Number(b['Attendance (%)']) || 0), 0) / list.length) : 0;
     avgAttendanceEl.textContent = Math.round(avgAtt * 10) / 10 + '%';
     const top = list.slice().sort((a, b) => b['Maths'] - a['Maths'])[0];
@@ -88,7 +92,7 @@ function computeStats(list) {
 
 //--------- Apply filters, search and sort---------
 function applyFilters() {
-    const q = searchBar.value.toLowerCase();
+    const q = searchInput.value.toLowerCase();
     const cls = classFilter.value;
     filtered = students.filter(s => {
         const matchsearch = q === '' || (s['Name'] || '').toLowerCase().includes(q) || (s['Student ID'] || '').toLowerCase().includes(q);

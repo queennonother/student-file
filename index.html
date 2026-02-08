@@ -4,49 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STUDENT FOLDER</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <h1>Student Dashboard</h1>
-    </header>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Student Performance Dashboard</h1>
+                <div class="small">Built with Excel/CSV, HTML, CSS and JavaScript</div>
+            </div>
 
-    <!-- Search bar -->
-    <input type="text" id="searchBar" placeholder="Search by name...">
+            <div class="controls">
+                <input id="search" type="search" placeholder="Search by name or ID" aria-label="search">
+                <select id="classFilter" aria-label="Filter by class">
+                    <option value="">All classes</option>
+                </select>
+                <button id="resetBtn">Reset</button>
+                <button id="exportBtn">Export CSV</button>
+            </div>
+        </header>
+        <section class="card">
+            <div class="stats" id="stats">
+                <div class="stat">
+                    <div class="small">Students</div>
+                    <div id="total">0</div>
+                </div>
+                <div class="stat">
+                    <div class="small">Avg. Attendance</div>
+                    <div id="avgAttendance">0%</div>
+                </div>
+                <div class="stat">
+                    <div class="small">Top Maths</div>
+                    <div id="topMaths">-</div>
+                </div>
+            </div>
+            <table aria-label="students table">
+                <thead>
+                    <tr>
+                        <th class="clickable" data-key="Student ID">Student ID ▾</th>
+                        <th class="clickable" data-key="Name">Name ▾</th>
+                        <th class="clickable" data-key="Class">Class ▾</th>
+                        <th class="clickable" data-key="Maths">Maths ▾</th>
+                        <th class="clickable" data-key="English">English ▾</th>
+                        <th class="clickable" data-key="Science">Science ▾</th>
+                        <th class="clickable" data-key="Attendance (%)">Attendance (%) ▾</th>
+                    </tr>
+                    </thead>
+                <tbody id="table-body">
+                    <!-- Rows inserted by JavaScript -->
+                </tbody>
+            </table>
 
-    <!-- Dropdown filter -->
-    <select id="classFilter">
-        <option value="">Filter by Class</option>
-        <option value="10A">10A</option>
-        <option value="10B">10B</option>
-        <option value="10C">10C</option>
-    </select>
+        </section>
 
-    <!-- Table -->
-    <table>
-        <thead>
-            <tr>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Class</th>
-                <th>Maths</th>
-                <th>English</th>
-                <th>Science</th>
-                <th>Attendance</th>
-            </tr>
-        </thead>
-        <tbody id="studentTable"></tbody>
-    </table>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Student Dashboard</p>
-    </footer>
-
-    
-    <link rel="stylesheet" href="style.css">
-
+        <footer style="margin-top:12px;text-align:center;color:var(--muted)">Created for class project • Add
+            students.csv inside <code>data/</code> folder</footer>
+    </div>
     <script src="index.js"></script>
 </body>
-
-</html> 
+</html>
